@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "doc-forgery-detection"
+version = "0.1.0"
+description = "Deep learning system for detecting and localising forged financial documents (receipts, invoices, bank statements), with live monitoring via Prometheus and Grafana."
+authors = ["ThinYadanar Oo <bi75hr@student.sunderland.ac.uk>"]
+readme = "README.md"
+packages = [{ include = "docforge", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = "^2.3"
+torchvision = "^0.18"
+numpy = "^1.26"
+opencv-python = "^4.10"
+lmdb = "^1.4"
+pillow = "^10.3"
+matplotlib = "^3.9"
+scikit-learn = "^1.5"
+tqdm = "^4.66"
+prometheus-client = "^0.20"
+fastapi = "^0.111"
+uvicorn = "^0.30"
+requests = "^2.32"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2"
+black = "^24.4"
+ruff = "^0.4"
+jupyter = "^1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100

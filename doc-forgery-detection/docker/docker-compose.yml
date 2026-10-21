@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  exporter:
+    build: ./exporter
+    container_name: docforge-exporter
+    ports:
+      - "9100:9100"
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: docforge-prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    depends_on:
+      - exporter
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: docforge-grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+volumes:
+  prometheus_data:
+  grafana_data:

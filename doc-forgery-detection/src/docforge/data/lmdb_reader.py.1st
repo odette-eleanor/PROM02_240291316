@@ -1,0 +1,51 @@
+"""
+Utilities for exploring and reading the DocTamper LMDB dataset.
+
+DocTamper (and similar document forgery datasets) are distributed as LMDB
+databases rather than plain image folders, so a normal image viewer or
+double-click will never open them. This module provides a small, dependency
+-light way to peek inside one and pull out entries for inspection.
+"""
+
+from pathlib import Path
+
+import lmdb
+
+
+def inspect(lmdb_dir: str | Path, n: int = 10) -> None:
+    """Print the first `n` keys and value sizes in an LMDB directory.
+
+    Run this first on any new LMDB folder you haven't seen before - key
+    naming conventions differ between datasets, so this tells you what
+    you're actually working with before you write extraction code.
+
+    Args:
+        lmdb_dir: path to the FOLDER containing data.mdb and lock.mdb
+                  (not the data.mdb file itself).
+        n: number of entries to print.
+    """
+    lmdb_dir = Path(lmdb_dir)
+    if not lmdb_dir.exists():
+        raise FileNotFoundError(f"LMDB directory not found: {lmdb_dir}")
+
+    env = lmdb.open(str(lmdb_dir), readonly=True, lock=False)
+    with env.begin() as txn:
+        total = txn.stat()["entries"]
+        print(f"LMDB dir: {lmdb_dir}")
+        print(f"Total entries: {total}")
+        print("-" * 50)
+        cursor = txn.cursor()
+        for i, (key, value) in enumerate(cursor):
+            print(f"{key!r} -> {len(value):,} bytes")
+            if i >= n - 1:
+                break
+    env.close()
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Usage: python -m docforge.data.lmdb_reader <path_to_lmdb_dir>")
+        sys.exit(1)
+    inspect(sys.argv[1])

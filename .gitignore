@@ -1,0 +1,40 @@
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Doc forgery detection datasets and generated artifacts
+doc-forgery-detection/data/
+doc-forgery-detection/models/
+doc-forgery-detection/outputs/
+
+# Logs
+*.log
+
+# Generated monitoring data
+system-monitoring/prometheus_data/
+system-monitoring/grafana_data/

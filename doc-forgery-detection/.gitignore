@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.python-version
+
+# Poetry
+poetry.lock.bak
+
+# Data (never commit datasets - point teammates/supervisors to the download source instead)
+data/*
+!data/.gitkeep
+
+# Model checkpoints / large artifacts
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Docker volumes if run locally
+docker/prometheus_data/
+docker/grafana_data/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Env
+.env
