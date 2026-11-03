@@ -9,8 +9,17 @@ __pycache__/
 poetry.lock.bak
 
 # Data (never commit datasets - point teammates/supervisors to the download source instead)
+# Dataset files and large archives
+data/raw/
+data/archives/
+data/processed/
+
+# Ignore other data files by default
 data/*
 !data/.gitkeep
+!data/splits/
+data/splits/*
+!data/splits/*.csv
 
 # Model checkpoints / large artifacts
 checkpoints/

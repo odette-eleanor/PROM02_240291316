@@ -1,0 +1,14 @@
+# Inspect
+poetry run python src/docforge/data/dataset_tools.py inspect --dataset small
+poetry run python src/docforge/data/dataset_tools.py inspect --dataset large
+
+# Verify
+poetry run python src/docforge/data/dataset_tools.py verify --dataset small
+poetry run python src/docforge/data/dataset_tools.py verify --dataset large
+
+# Visualise
+poetry run python src/docforge/data/dataset_tools.py visualize --dataset small --index 0
+poetry run python src/docforge/data/dataset_tools.py visualize --dataset large --index 100
+
+# Split (only after checking official split information)
+poetry run python src/docforge/data/dataset_tools.py split --dataset large
